@@ -1,15 +1,17 @@
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from webapp.db import db
 
 class User(db.Model, UserMixin):
+    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), index=True, unique=True)
     password = db.Column(db.String(120))
     role = db.Column(db.String(10), index=True)
     email = db.Column(db.String(50))
+    boards = relationship("Boards", back_populates="user")
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

@@ -10,7 +10,7 @@ blueprint = Blueprint("user", __name__, url_prefix="/users")
 @blueprint.route("/login")
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("home.home"))
+        return redirect(url_for("home.index"))
     title = "Авторизация"
     login_form = LoginForm()
     return render_template("user/login.html", page_title=title, form=login_form)
@@ -23,7 +23,7 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             flash("Вы успешно вошли на сайт")
-            return redirect(url_for("home.home"))
+            return redirect(url_for("home.index"))
     flash("Неправильное имя или пароль")
     return redirect(url_for("user.login"))
 
@@ -31,17 +31,17 @@ def process_login():
 def logout():
     logout_user()
     flash("Вы успешно разлогинились")
-    return redirect(url_for("home.home"))
+    return redirect(url_for("home.index"))
 
 @blueprint.route("/register")
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for("home.home"))
+        return redirect(url_for("home.index"))
     title = "Регистрация"
     form = RegistrationForm()
     return render_template("user/registration.html", page_title=title, form=form)
 
-@blueprint.route("process-reg", methods=["Post"])
+@blueprint.route("/process-reg", methods=["Post"])
 def process_reg():
     form = RegistrationForm()
     if form.validate_on_submit():
