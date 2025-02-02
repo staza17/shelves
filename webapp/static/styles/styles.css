@@ -1,0 +1,56 @@
+html {
+    min-height: 100%;
+}
+
+* {
+font-family: CURSIVE;
+}
+
+div.col-6 ul li ul {
+    display: none;
+}
+
+div.col-6 li:hover > ul {
+    list-style-type: none;
+    display: block;
+    position: absolute;
+    top: 100;
+    left: 220px;
+}
+
+div.col-6 ul {
+    list-style-type: none;
+}
+
+div.menu-bar ul li ul {
+  display: none;
+}
+
+div.menu-bar li:hover > ul {
+  list-style-type: none;
+  text-align: left;
+  display: block;
+  position: absolute;
+  top:0;
+  left:350px;
+}
+
+div.menu-bar ul {
+    list-style-type: none;
+}
+
+div {
+    text-align: center;
+    list-style-type: none;
+}
+
+.container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alert-warning {
+    text-align: left;
+}
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+        <div class="col-8 container">
+            <form action="{{ url_for('cards.process_edit_card') }}" method="POST">
+                <input type="hidden" name="board" value="{{ board_id }}">
+                <input type="hidden" name="card" value="{{ card.id }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.text.label }}
+                    {{ form.text(value=card.text) }}
+                </div>
+                {{ form.submit() }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <br>
+</div>
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <form action="{{ url_for('cards.create_card', board_id=board_id, col_id=col_list[0].id) }}" method="GET">
+                <input type="submit" class="btn btn-primary" value="Создать карточку">
+            </form>
+        </div>
+        <div class="p-2">
+            <form action="{{ url_for('boards.del_board', board_id=board_id, origin='board') }}" method="GET">
+                <input type="submit" class="btn btn-primary" value="Удалить доску">
+            </form>
+        </div>
+    </div>
+<div class="row">
+    <br>
+</div>
+<div class="row" style="font-size: 20px;">
+    {% for col in col_list %}
+    <div class="col-4">
+        <div class="menu-bar">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #125899; color: white">
+                <h3>{{ col.col_name }}</h3>
+                <ul class="list-group">
+                    <li>
+                        <form action="{{ url_for('cards.create_card', board_id=board_id, col_id=col.id) }}" method="GET">
+                            <input type="submit" class="btn btn-primary" value="Создать карточку">
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{{ url_for('col.edit_col_name', board_id=board_id, col_id=col.id) }}" method="GET">
+                            <input type="submit" class="btn btn-primary" value="Редактировать название">
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        {% for card in cards_list %}
+            {% if card.col_id == col.id %}
+            <ul class="list-group">
+              <li class="list-group-item">{{ card.text }}
+                    <ul class="list-group">
+                        <li>
+                            <form action="{{ url_for('cards.edit_card', board_id=board_id, card_id=card.id) }}" method="GET">
+                                <input type="submit" class="btn btn-primary" value="Редактировать карточку">
+                            </form>
+                        </li>
+                        <li class="d-flex flex-row">
+                        {% if card.number > 1 %}
+                            <form action="{{ url_for('cards.move_card', board_id=board_id, card_id=card.id, act=1) }}" method="GET">
+                                <input type="submit" class="btn btn-primary btn-lg" style="outline-color: white" value="&UpArrowBar;">
+                            </form>
+                            <form action="{{ url_for('cards.move_card', board_id=board_id, card_id=card.id, act=2) }}" method="GET">
+                                <input type="submit" class="btn btn-primary btn-lg" value="&UpArrow;">
+                            </form>
+                        {% endif %}
+                        {% if card.number != col_len[col.id] %}
+                            <form action="{{ url_for('cards.move_card', board_id=board_id, card_id=card.id, act=3) }}" method="GET">
+                                <input type="submit" class="btn btn-primary btn-lg" value="&downarrow;">
+                            </form>
+                            <form action="{{ url_for('cards.move_card', board_id=board_id, card_id=card.id, act=4) }}" method="GET">
+                                <input type="submit" class="btn btn-primary btn-lg" value="&DownArrowBar;">
+                            </form>
+                        {% endif %}
+                        </li>
+                            {% for col in col_list %}
+                                {% if col.id != card.col_id %}
+                            <li>
+                                <form action="{{ url_for('col.move_to_col', board_id=board_id, card_id=card.id, col_id = col.id) }}" method="GET">
+                                    <input type="submit" class="btn btn-primary" style="width: 210px; white-space: normal" value="{{ 'Переместить в колонку ' + col_short_name[col.id]}}">
+                                </form>
+                            </li>
+                                {% endif %}
+                            {% endfor %}
+                        <li>
+                            <form action="{{ url_for('cards.del_card', board_id=board_id, card_id=card.id) }}" method="GET">
+                                <input type="submit" class="btn btn-primary" style="width: 210px;" value="Удалить карточку">
+                            </form>
+                        </li>
+                    </ul>
+              </li>
+            </ul>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="row" style="line-height: 170px">
+    <br>
+</div>
+{% endblock %}
