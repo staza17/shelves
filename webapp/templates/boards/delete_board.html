@@ -2,22 +2,22 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-8 container">
+    <div class="col-8 container header">
         <h2>Вы действительно хотите удалить доску "{{ board.board_name }}"?</h2>
         <div class="d-flex flex-row mb-3 justify-content-center">
             <div class="p-2">
                 <form action="{{ url_for('boards.process_del_board', board_id=board.id) }}" method="POST">
-                    <input type="submit" class="btn btn-primary" style="min-width: 50px" value="Да">
+                    <input type="submit" class="btn btn-dark-brown" style="min-width: 50px" value="Да">
                 </form>
             </div>
             <div class="p-2">
                 {% if origin=='home' %}
                 <form action="{{ url_for('home.index') }}" method="GET">
-                    <input type="submit" class="btn btn-primary" value="Нет">
+                    <input type="submit" class="btn btn-dark-brown" value="Нет">
                 </form>
-                {% else %}
+                {% elif origin=='board' %}
                 <form action="{{ url_for('boards.get_board', id=board.id) }}" method="GET">
-                    <input type="submit" class="btn btn-primary" value="Нет">
+                    <input type="submit" class="btn btn-dark-brown" value="Нет">
                 </form>
                 {% endif %}
             </div>

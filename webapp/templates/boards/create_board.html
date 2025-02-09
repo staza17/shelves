@@ -11,7 +11,7 @@
     {% endif %}
 {% endwith %}
     <div class="row">
-        <div class="col-4 container">
+        <div class="col-4 container header">
 
             <form action="{{ url_for('boards.process_create_board') }}" method="POST">
                 {{ form.hidden_tag() }}

@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-        <div class="col-8 container">
+        <div class="col-8 container header">
             <form action="{{ url_for('col.process_edit_col_name') }}" method="POST">
                 <input type="hidden" name="board" value="{{ board_id }}">
                 <input type="hidden" name="col" value="{{ col.id }}">

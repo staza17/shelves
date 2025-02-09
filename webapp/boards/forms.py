@@ -7,7 +7,7 @@ from webapp.boards.models import Boards
 
 class CreateBoard(FlaskForm):
     board_name = StringField("Название доски", validators=[DataRequired()], render_kw={"class": "form-control"})
-    submit = SubmitField("Создать", render_kw={"class": "btn btn-primary"})
+    submit = SubmitField("Создать", render_kw={"class": "btn btn-dark-brown"})
 
     def validate_board_name(self, board_name):
         name_count = 0

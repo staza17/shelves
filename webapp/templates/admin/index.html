@@ -1,3 +1,26 @@
 {% extends "base.html" %}
 
-{% block content %}Контент админки{% endblock %}
+{% block content %}
+<div class="col-8 container header">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h3>Имя пользователя</h3>
+        </div>
+        <div class="p-2">
+            <h3>Количество созданных досок</h3>
+        </div>
+    </div>
+</div>
+{% for user in users %}
+<div class="col-8 container header">
+    <div class="d-flex justify-content-between mb-3">
+        <div class="p-2">
+            <h3>{{ user.username }}</h3>
+        </div>
+        <div class="p-2">
+            <h3>{{ users_boards[user.id] }}</h3>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -15,56 +15,60 @@
     {% endwith %}
 </div>
 {% if current_user.is_authenticated %}
-{% if boards_list %}
-    <div class="row">
-        <div class="col-4 container">
-            <a class="btn btn-primary" href="{{ url_for('boards.create_board') }}">Создать новую доску</a>
+    {% if boards_list %}
+        <div class="row">
+            <div class="col-4 container">
+                <form action="{{ url_for('boards.create_board') }}">
+                    <input type="submit" class="btn btn-dark-brown" value="Создать новую доску">
+                </form>
+                    <div>
+                        <br>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 container">
+                {% for board in boards_list %}
+                    <ul class="list-group">
+                        <li>
+                            <a href="{{ url_for('boards.get_board', id=board.id) }}" class="btn btn-brown"
+                            style="width: 400px; min-height: 150px; font-size: 25px; display: inline-flex; justify-content: center;
+                            align-items: center; white-space: normal; word-wrap: break-word;">{{ board.board_name }}</a>
+                            <ul class="list-group">
+                                <li>
+                                    <form action="{{ url_for('boards.del_board', board_id=board.id, origin='home') }}" method="GET">
+                                        <input type="submit" class="btn btn-dark-brown" value="Удалить доску">
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 <div>
                     <br>
                 </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 container">
-            {% for board in boards_list %}
-                <ul class="list-group">
-                    <li>
-                        <a href="{{ url_for('boards.get_board', id=board.id) }}" class="btn btn-outline-light"
-                        style="width: 400px; min-height: 150px; font-size: 25px; display: inline-flex; justify-content: center;
-                        align-items: center; white-space: normal; word-wrap: break-word;">{{ board.board_name }}</a>
-                        <ul class="list-group">
-                            <li>
-                                <form action="{{ url_for('boards.del_board', board_id=board.id, origin='home') }}" method="GET">
-                                    <input type="submit" class="btn btn-primary" value="Удалить доску">
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            <div>
-                <br>
+                {% endfor %}
+                <div>
+                    <br>
+                </div>
+                {% else %}
+                <div class="col-6 container header">
+                    <h3>У вас пока не создано ни одной доски</h3>
+                    <a class="btn btn-dark-brown" href="{{ url_for('boards.create_board') }}">Создать доску</a>
+                </div>
             </div>
-            {% endfor %}
-            <div>
-                <br>
-            </div>
-            {% else %}
-                <h3>У вас пока не создано ни одной доски</h3>
-                <a class="btn btn-primary" href="{{ url_for('boards.create_board') }}">Создать доску</a>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
 {% else %}
     <div class="row">
-        <div class="col-8 container">
+        <div class="col-8 container header">
             <h3>Чтобы пользоваться сервисом войдите или зарегистрируйтесь</h3>
             <br>
         </div>
     </div>
     <div class="row">
         <div class="col-12 container">
-            <a class="btn btn-primary" href="{{ url_for('user.login') }}">Войти</a>
-            <a class="btn btn-primary" href="{{ url_for('user.register') }}">Зарегистрироваться</a>
+            <a class="btn btn-dark-brown" href="{{ url_for('user.login') }}">Войти</a>
+            <a class="btn btn-dark-brown" href="{{ url_for('user.register') }}">Зарегистрироваться</a>
         </div>
     </div>
 {% endif %}

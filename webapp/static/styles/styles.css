@@ -1,9 +1,60 @@
-html {
+html, body {
     min-height: 100%;
+    background-image: url("images/shelves.jpg");
+    background-size: cover;
+}
+
+.btn-brown {
+    box-shadow: 3px 3px, -2px 0 .4em #473931;
+    background-color: #c29f93;
+    border-style: solid;
+    padding: 3px;
+    border-color: #ede3d8;
+    color: #291f1b;
+}
+
+.btn-brown:hover {
+    background-color: #e6bbae;
+    border-color: #473931;
+    color: #291f1b;
+    font-weight: bold;
+}
+
+.btn-dark-brown {
+    box-shadow: 2px 2px 2px, -1px 0 1px #ede3d8;
+    background-color: #473931;
+    border-style: solid;
+    padding: 8px 16px;
+    border-color: #ede3d8;
+    border-radius: 5px;
+    color: #ede3d8;
+}
+
+.btn-dark-brown:hover {
+    background-color: #29201b;
+    border-color: #ede3d8;
+    color: #ede3d8;
 }
 
 * {
-font-family: CURSIVE;
+    font-family: book antiqua;
+    font-weight: 900;
+}
+
+*.header {
+    color: #f5efeb;
+    font-size: 25px;
+    text-shadow: 2px 2px 3px #473931;
+}
+
+li.card {
+    background-color: #e6cfc8;
+    color: #291f1b;
+}
+
+li.card:hover {
+    background-color: #e6bbae;
+    color: #291f1b;
 }
 
 div.col-6 ul li ul {
