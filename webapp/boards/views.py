@@ -63,10 +63,11 @@ def process_create_board():
                 flash("{}".format(error))
     return redirect(url_for("boards.create_board"))
 
-@blueprint.route("/del-board/<int:board_id>", methods=["GET"])
-def del_board(board_id):
+@blueprint.route("/del-board/<int:board_id>/<origin>", methods=["GET"])
+def del_board(board_id, origin):
     board = Boards.query.filter_by(id=board_id).first()
-    return render_template("boards/delete_board.html", page_title="Удаление доски", board=board)
+    return render_template("boards/delete_board.html", page_title="Удаление доски",
+                           board=board, origin=origin)
 
 @blueprint.route("/process-del-board/<int:board_id>", methods=["POST"])
 def process_del_board(board_id):
